@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<meta name="description" content="Tigers of Wrath — independent creative projects.">
+<title>Tigers of Wrath</title>
+<style>
+  * { box-sizing: border-box; }
+  html { background: white; }
+  body { margin: 0; min-height: 100vh; background: #fff; color: #111; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  .site { width: 100%; max-width: 1450px; padding: 38px 44px 90px; margin: 0 auto; }
+  header { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; }
+  .mark { display: inline-block; min-width: 0; }
+  .mark img { display: block; width: clamp(180px, 23vw, 260px); max-width: 100%; height: auto; }
+  .contact { display: inline-block; flex-shrink: 0; padding: 11px 17px; border: 1px solid #111; color: #111; background: #fff; text-decoration: none; font-size: 11px; line-height: 1.1; white-space: nowrap; }
+  .contact:hover, .contact:focus-visible { background: #111; color: #fff; }
+  main { padding-top: 56px; }
+  .page { max-width: 710px; }
+  .index p { margin: 0 0 4px; font-size: 13px; line-height: 1.8; }
+  .index a { color: inherit; text-decoration: none; }
+  .index a:hover strong, .index a:focus-visible strong { text-decoration: underline; text-underline-offset: 3px; }
+  .index strong { font-weight: 700; }
+  .sub { color: #373737; }
+  .detail h1 { margin: 0 0 8px; font-size: 18px; letter-spacing: -.018em; }
+  .detail p { margin: 0 0 9px; font-size: 13px; line-height: 1.7; max-width: 550px; }
+  .detail .place { margin-bottom: 25px; color: #555; }
+  .back { display: inline-block; margin-top: 34px; color: #111; font-size: 12px; text-underline-offset: 3px; }
+  .visually-hidden { position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+  [hidden] { display: none !important; }
+  @media (max-width: 600px) {
+    .site { padding: 28px 20px 75px; }
+    .mark img { width: clamp(164px, 50vw, 218px); }
+    .contact { font-size: 10px; padding: 9px 11px; }
+    main { padding-top: 52px; }
+    .index p { font-size: 13px; line-height: 1.65; margin-bottom: 11px; }
+    .sub { display: block; }
+  }
+</style>
+</head>
+<body>
+<div class="site">
+  <header>
+    <a class="mark" href="#" aria-label="Tigers of Wrath — home">
+      <img width="620" height="145" src="data:image/png;base64,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" alt="tigersofwrath">
+    </a>
+    <a class="contact" href="#contact">Contact Us</a>
+  </header>
+  <main>
+    <section class="page index" data-page="home" aria-label="Projects">
+      <h1 class="visually-hidden">Selected projects</h1>
+      <p><a href="#winemaking"><strong>Winemaking</strong><span class="sub"> — Vayots Dzor, Armenia</span></a></p>
+      <p><a href="#niva"><strong>Lada Niva</strong><span class="sub"> — Vayots Dzor, Armenia</span></a></p>
+      <p><a href="#knitwear"><strong>Knitwear</strong></a></p>
+    </section>
+    <section class="page detail" data-page="winemaking" hidden>
+      <h1>Winemaking</h1>
+      <p class="place">Vayots Dzor, Armenia</p>
+      <p>Ungrafted old vines. Native fermentations. Minimal intervention.</p>
+      <a class="back" href="#">Back to index</a>
+    </section>
+    <section class="page detail" data-page="niva" hidden>
+      <h1>Lada Niva</h1>
+      <p class="place">Vayots Dzor, Armenia</p>
+      <p>A working vehicle adapted for vineyard access and the surrounding terrain.</p>
+      <a class="back" href="#">Back to index</a>
+    </section>
+    <section class="page detail" data-page="knitwear" hidden>
+      <h1>Knitwear</h1>
+      <p>Work in progress.</p>
+      <a class="back" href="#">Back to index</a>
+    </section>
+    <section class="page detail" data-page="contact" hidden>
+      <h1>Contact</h1>
+      <p>Contact details to follow.</p>
+      <a class="back" href="#">Back to index</a>
+    </section>
+  </main>
+</div>
+<script>
+(() => {
+  const allowed = new Set(['home', 'winemaking', 'niva', 'knitwear', 'contact']);
+  const titles = { home: 'Tigers of Wrath', winemaking: 'Winemaking', niva: 'Lada Niva', knitwear: 'Knitwear', contact: 'Contact' };
+  const show = () => {
+    const key = decodeURIComponent(location.hash.replace(/^#/, '')) || 'home';
+    const current = allowed.has(key) ? key : 'home';
+    document.querySelectorAll('[data-page]').forEach(node => { node.hidden = node.dataset.page !== current; });
+    document.title = current === 'home' ? titles.home : titles[current] + ' — Tigers of Wrath';
+    window.scrollTo(0, 0);
+  };
+  window.addEventListener('hashchange', show);
+  show();
+})();
+</script>
+</body>
+</html>
