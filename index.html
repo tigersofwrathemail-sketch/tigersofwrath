@@ -6,35 +6,70 @@
 <meta name="theme-color" content="#ffffff">
 <meta name="description" content="Tigers of Wrath — independent creative projects.">
 <title>Tigers of Wrath</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; }
   html { background: #fff; }
-  body { margin: 0; min-height: 100vh; background: #fff; color: #111; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  body {
+    margin: 0; min-height: 100vh; background: #fff; color: #111;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  }
   .site { width: 100%; max-width: 1450px; padding: 38px 44px 90px; margin: 0 auto; }
   header { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; }
   .mark { display: inline-block; min-width: 0; }
   .mark img { display: block; width: clamp(180px, 23vw, 260px); max-width: 100%; height: auto; }
-  .contact { display: inline-block; flex-shrink: 0; padding: 11px 17px; border: 1px solid #111; color: #111; background: #fff; text-decoration: none; font-size: 11px; line-height: 1.1; white-space: nowrap; }
+  .contact {
+    display: inline-block; flex-shrink: 0; padding: 11px 17px; border: 1px solid #111;
+    color: #111; background: #fff; text-decoration: none; font-size: 10px;
+    font-weight: 500; line-height: 1.1; white-space: nowrap;
+  }
   .contact:hover, .contact:focus-visible { background: #111; color: #fff; }
-  main { padding-top: 15px; }
+  main { padding-top: 13px; }
   .document { max-width: 650px; }
-  .document p { margin: 0; font-size: 12px; line-height: 1.65; letter-spacing: .005em; }
-  .document p + p { margin-top: 3px; }
-  .document .lead { margin-bottom: 13px; }
-  .document strong { font-weight: 700; }
-  .document em { font-style: italic; }
-  .detail h1 { margin: 0 0 8px; font-size: 16px; letter-spacing: -.018em; }
-  .detail p { margin: 0 0 9px; font-size: 12px; line-height: 1.65; max-width: 550px; }
-  .back { display: inline-block; margin-top: 30px; color: #111; font-size: 12px; text-underline-offset: 3px; }
-  .visually-hidden { position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+  .artifact {
+    display: inline-block; max-width: 100%; color: inherit; text-decoration: none;
+    padding: 3px 0; cursor: pointer;
+  }
+  .artifact-name {
+    display: block; font-size: 14px; line-height: 1.38; font-weight: 700;
+    letter-spacing: -.035em;
+  }
+  .artifact-place {
+    display: block; margin-top: 2px; font-size: 11.5px; line-height: 1.6;
+    letter-spacing: -.015em; font-weight: 500;
+  }
+  .artifact-place em { font-weight: 300; font-style: italic; }
+  .artifact:hover .artifact-name, .artifact:focus-visible .artifact-name {
+    text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px;
+  }
+  .artifact:focus-visible { outline: 1px solid #111; outline-offset: 5px; }
+  .detail h1 {
+    margin: 3px 0 2px; font-size: 14px; line-height: 1.38; letter-spacing: -.035em; font-weight: 700;
+  }
+  .detail .location {
+    margin: 0; font-size: 11.5px; line-height: 1.6; font-weight: 500;
+  }
+  .detail .location em { font-weight: 300; }
+  .record { margin-top: 23px; max-width: 520px; }
+  .record p { margin: 0 0 5px; font-size: 11.5px; line-height: 1.7; font-weight: 400; }
+  .record strong { font-weight: 700; }
+  .record em { font-weight: 300; font-style: italic; }
+  .back { display: inline-block; margin-top: 29px; color: #111; font-size: 10px; font-weight: 500; text-underline-offset: 3px; }
+  .visually-hidden {
+    position: absolute; height: 1px; width: 1px; overflow: hidden;
+    clip: rect(0, 0, 0, 0); white-space: nowrap;
+  }
   [hidden] { display: none !important; }
   @media (max-width: 600px) {
     .site { padding: 28px 20px 75px; }
     .mark img { width: clamp(164px, 50vw, 218px); }
     .contact { font-size: 10px; padding: 9px 11px; }
-    main { padding-top: 16px; }
-    .document p { font-size: 12px; line-height: 1.6; }
-    .document .lead { margin-bottom: 11px; }
+    main { padding-top: 9px; }
+    .artifact-name { font-size: 13px; }
+    .artifact-place, .detail .location, .record p { font-size: 11px; }
   }
 </style>
 </head>
@@ -47,27 +82,40 @@
     <a class="contact" href="#contact">Contact Us</a>
   </header>
   <main>
-    <section class="document" data-page="home" aria-label="Winemaking">
-      <h1 class="visually-hidden">Winemaking — Vayots Dzor, Armenia</h1>
-      <p class="lead"><strong>Winemaking.</strong> <em>Vayots Dzor, Armenia.</em></p>
-      <p><strong>Aghavnadzor:</strong> Ungrafted, dry-farmed old vines.</p>
-      <p><strong>Cellar:</strong> Native fermentations. <em>No added sulfur dioxide.</em></p>
+    <section class="document" data-page="home" aria-label="Projects">
+      <h1 class="visually-hidden">Projects</h1>
+      <a class="artifact" href="#tarllc" aria-label="tarllc, wine project, Vayots Dzor, Armenia">
+        <span class="artifact-name">tarllc</span>
+        <span class="artifact-place">Vayots Dzor, <em>Armenia</em></span>
+      </a>
+    </section>
+    <section class="document detail" data-page="tarllc" hidden>
+      <h1>tarllc</h1>
+      <p class="location">Vayots Dzor, <em>Armenia</em></p>
+      <div class="record">
+        <p><strong>Aghavnadzor.</strong> Ungrafted, dry-farmed old vines.</p>
+        <p>Native fermentations. <em>No added sulfur dioxide.</em></p>
+      </div>
+      <a class="back" href="#">Index</a>
     </section>
     <section class="document detail" data-page="contact" hidden>
       <h1>Contact</h1>
-      <p>Contact details to follow.</p>
-      <a class="back" href="#">Back</a>
+      <div class="record"><p>Contact details to follow.</p></div>
+      <a class="back" href="#">Index</a>
     </section>
   </main>
 </div>
 <script>
 (() => {
   const show = () => {
-    const current = location.hash === '#contact' ? 'contact' : 'home';
+    const fragment = location.hash.replace(/^#/, '');
+    const current = fragment === 'contact' ? 'contact'
+      : (fragment === 'tarllc' || fragment === 'winemaking') ? 'tarllc' : 'home';
     document.querySelectorAll('[data-page]').forEach(section => {
       section.hidden = section.dataset.page !== current;
     });
-    document.title = current === 'contact' ? 'Contact — Tigers of Wrath' : 'Tigers of Wrath';
+    document.title = current === 'home' ? 'Tigers of Wrath'
+      : current === 'tarllc' ? 'tarllc — Tigers of Wrath' : 'Contact — Tigers of Wrath';
     window.scrollTo(0, 0);
   };
   window.addEventListener('hashchange', show);
