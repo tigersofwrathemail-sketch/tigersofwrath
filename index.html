@@ -24,9 +24,10 @@
   main { padding-top: 13px; }
   .document { max-width: 650px; }
   .artifact {
-    display: inline-block; max-width: 100%; color: inherit; text-decoration: none;
+    display: block; width: fit-content; max-width: 100%; color: inherit; text-decoration: none;
     padding: 3px 0; cursor: pointer; white-space: nowrap;
   }
+  .artifact + .artifact { margin-top: 3px; }
   .artifact-name {
     display: inline; font-size: 14px; line-height: 1.38; font-weight: 500;
     letter-spacing: -.035em;
@@ -84,6 +85,9 @@
       <a class="artifact" href="#tarllc" aria-label="tarllc, wine project, Vayots Dzor, Armenia (2015 - 2023)">
         <span class="artifact-name">tarllc</span> <span class="artifact-dash">—</span> <span class="artifact-place">Vayots Dzor, Armenia (2015 - 2023)</span>
       </a>
+      <a class="artifact" href="#niva" aria-label="Lada Niva 21213, Vayots Dzor, Armenia">
+        <span class="artifact-name">Lada Niva 21213</span> <span class="artifact-dash">—</span> <span class="artifact-place">Vayots Dzor, Armenia</span>
+      </a>
       <a class="contact-link" href="#contact">Contact Us</a>
     </section>
     <section class="document detail" data-page="tarllc" hidden>
@@ -92,6 +96,15 @@
       <div class="record">
         <p><strong>Aghavnadzor.</strong> Ungrafted, dry-farmed old vines.</p>
         <p>Native fermentations. <em>No added sulfur dioxide.</em></p>
+      </div>
+      <a class="back" href="#">Index</a>
+    </section>
+    <section class="document detail" data-page="niva" hidden>
+      <h1>Lada Niva 21213</h1>
+      <p class="location">Vayots Dzor, Armenia</p>
+      <div class="record">
+        <p>A working vehicle adapted for access to the vineyards of Aghavnadzor.</p>
+        <p>Ground clearance, protection, suspension, and the ability to carry tools into the valley.</p>
       </div>
       <a class="back" href="#">Index</a>
     </section>
@@ -107,12 +120,15 @@
   const show = () => {
     const fragment = location.hash.replace(/^#/, '');
     const current = fragment === 'contact' ? 'contact'
-      : (fragment === 'tarllc' || fragment === 'winemaking') ? 'tarllc' : 'home';
+      : (fragment === 'tarllc' || fragment === 'winemaking') ? 'tarllc'
+      : fragment === 'niva' ? 'niva' : 'home';
     document.querySelectorAll('[data-page]').forEach(section => {
       section.hidden = section.dataset.page !== current;
     });
     document.title = current === 'home' ? 'Tigers of Wrath'
-      : current === 'tarllc' ? 'tarllc — Tigers of Wrath' : 'Contact — Tigers of Wrath';
+      : current === 'tarllc' ? 'tarllc — Tigers of Wrath'
+      : current === 'niva' ? 'Lada Niva 21213 — Tigers of Wrath'
+      : 'Contact — Tigers of Wrath';
     window.scrollTo(0, 0);
   };
   window.addEventListener('hashchange', show);
