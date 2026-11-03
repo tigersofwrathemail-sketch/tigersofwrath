@@ -54,6 +54,8 @@
     padding: 3px 0; cursor: pointer; white-space: nowrap;
   }
   .artifact + .artifact { margin-top: 3px; }
+  .artifact-poems { white-space: normal; }
+  .artifact-poems .artifact-place { white-space: nowrap; }
   .artifact-name {
     display: inline; font-size: 14px; line-height: 1.38; font-weight: 400;
     letter-spacing: -.035em;
@@ -110,6 +112,9 @@
   <main>
     <section class="document" data-page="home" aria-label="Projects">
       <h1 class="visually-hidden">Projects</h1>
+      <a class="artifact artifact-poems" href="#poems" aria-label="THE ONLY THING THAT CARRIES WEIGHT, SELECTED POEMS, 2009 to 2019">
+        <span class="artifact-name">THE ONLY THING THAT CARRIES WEIGHT</span> <span class="artifact-dash">—</span> <span class="artifact-place">SELECTED POEMS (2009–2019)</span>
+      </a>
       <a class="artifact" href="#tarllc" aria-label="tarllc, wine project, Vayots Dzor, Armenia (2015 - 2023)">
         <span class="artifact-name">tarllc</span> <span class="artifact-dash">—</span> <span class="artifact-place">Vayots Dzor, Armenia (2015 - 2023)</span>
       </a>
@@ -117,6 +122,10 @@
         <span class="artifact-name">Lada Niva 21213</span> <span class="artifact-dash">—</span> <span class="artifact-place">Vayots Dzor, Armenia (January 2022)</span>
       </a>
       <a class="contact-link" href="#contact">Contact Us</a>
+    </section>
+    <section class="document detail" data-page="poems" hidden>
+      <h1>THE ONLY THING THAT CARRIES WEIGHT</h1>
+      <p class="location">SELECTED POEMS (2009–2019)</p>
     </section>
     <section class="project-image" data-page="tarllc" aria-label="tarllc illustration" hidden>
       <img src="tarllc.PNG" alt="Abstract watercolor drawing of the old-vine vineyard in Vayots Dzor" width="1086" height="1448">
@@ -136,6 +145,7 @@
   const show = () => {
     const fragment = location.hash.replace(/^#/, '');
     const current = fragment === 'contact' ? 'contact'
+      : fragment === 'poems' ? 'poems'
       : (fragment === 'tarllc' || fragment === 'winemaking') ? 'tarllc'
       : fragment === 'niva' ? 'niva' : 'home';
     document.querySelectorAll('[data-page]').forEach(section => {
@@ -145,6 +155,7 @@
     document.querySelector('.site').classList.toggle('subpage', current !== 'home');
     document.querySelector('[data-index-footer]').hidden = current === 'home';
     document.title = current === 'home' ? 'tigersofwrath'
+      : current === 'poems' ? 'THE ONLY THING THAT CARRIES WEIGHT — tigersofwrath'
       : current === 'tarllc' ? 'tarllc — tigersofwrath'
       : current === 'niva' ? 'Lada Niva 21213 — tigersofwrath'
       : 'Contact — tigersofwrath';
