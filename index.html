@@ -49,6 +49,15 @@
     max-width: 100%; max-height: calc(100vh - 64px); max-height: calc(100dvh - 64px);
     object-fit: contain;
   }
+  .project-pdf {
+    display: flex; flex-direction: column; flex: 1;
+    width: 100%; min-height: 0; background: #fff;
+  }
+  .project-pdf iframe {
+    width: 100%; height: calc(100vh - 64px); height: calc(100dvh - 64px);
+    min-height: 350px; display: block; border: 0; background: #fff;
+  }
+  .pdf-open { margin-left: 26px; }
   .artifact {
     display: block; width: fit-content; max-width: 100%; color: inherit; text-decoration: none;
     padding: 3px 0; cursor: pointer; white-space: nowrap;
@@ -123,9 +132,8 @@
       </a>
       <a class="contact-link" href="#contact">Contact Us</a>
     </section>
-    <section class="document detail" data-page="poems" hidden>
-      <h1>THE ONLY THING THAT CARRIES WEIGHT</h1>
-      <p class="location">SELECTED POEMS (2009–2019)</p>
+    <section class="project-pdf" data-page="poems" aria-label="Selected poems PDF" hidden>
+      <iframe src="The_Only_Thing_That_Carries_Weight.pdf" title="THE ONLY THING THAT CARRIES WEIGHT — SELECTED POEMS 2009–2019" loading="lazy"></iframe>
     </section>
     <section class="project-image" data-page="tarllc" aria-label="tarllc illustration" hidden>
       <img src="tarllc.PNG" alt="Abstract watercolor drawing of the old-vine vineyard in Vayots Dzor" width="1086" height="1448">
@@ -138,7 +146,7 @@
       <div class="record"><p>Contact details to follow.</p></div>
     </section>
   </main>
-  <footer class="site-index" data-index-footer hidden><a class="back" href="#">Index</a></footer>
+  <footer class="site-index" data-index-footer hidden><a class="back" href="#">Index</a><a class="back pdf-open" href="The_Only_Thing_That_Carries_Weight.pdf" target="_blank" rel="noopener" data-pdf-open hidden>Open PDF</a></footer>
 </div>
 <script>
 (() => {
@@ -151,9 +159,10 @@
     document.querySelectorAll('[data-page]').forEach(section => {
       section.hidden = section.dataset.page !== current;
     });
-    document.querySelector('.site').classList.toggle('image-view', current === 'tarllc' || current === 'niva');
+    document.querySelector('.site').classList.toggle('image-view', current === 'tarllc' || current === 'niva' || current === 'poems');
     document.querySelector('.site').classList.toggle('subpage', current !== 'home');
     document.querySelector('[data-index-footer]').hidden = current === 'home';
+    document.querySelector('[data-pdf-open]').hidden = current !== 'poems';
     document.title = current === 'home' ? 'tigersofwrath'
       : current === 'poems' ? 'THE ONLY THING THAT CARRIES WEIGHT — tigersofwrath'
       : current === 'tarllc' ? 'tarllc — tigersofwrath'
