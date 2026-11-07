@@ -31,7 +31,7 @@
 
   header { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; }
   .mark { display: inline-block; min-width: 0; }
-  .mark img { display: block; width: clamp(180px, 23vw, 260px); max-width: 100%; height: clamp(53px, 7vw, 78px); object-fit: cover; object-position: center; transform: translateX(-6.51%); }
+  .mark img { display: block; width: clamp(180px, 23vw, 260px); max-width: 100%; height: clamp(53px, 7vw, 78px); object-fit: cover; object-position: center; }
   main { padding-top: 13px; }
   .document { max-width: 650px; }
   .site.image-view {
@@ -172,6 +172,59 @@
   };
   window.addEventListener('hashchange', show);
   show();
+
+  // Align the first visible dark stroke of the uploaded wordmark with the
+  // left edge of the portfolio entries, independent of the PNG's whitespace.
+  const wordmark = document.querySelector('.mark img');
+  const alignWordmark = () => {
+    if (!wordmark.complete || !wordmark.naturalWidth) return;
+    const rect = wordmark.getBoundingClientRect();
+    const width = wordmark.clientWidth;
+    const height = wordmark.clientHeight;
+    if (!width || !height) return;
+
+    try {
+      const naturalWidth = wordmark.naturalWidth;
+      const naturalHeight = wordmark.naturalHeight;
+      const sampleWidth = Math.min(512, naturalWidth);
+      const sampleHeight = Math.max(1, Math.round(sampleWidth * naturalHeight / naturalWidth));
+      const canvas = document.createElement('canvas');
+      canvas.width = sampleWidth;
+      canvas.height = sampleHeight;
+      const ctx = canvas.getContext('2d', { willReadFrequently: true });
+      if (!ctx) return;
+      ctx.drawImage(wordmark, 0, 0, sampleWidth, sampleHeight);
+      const pixels = ctx.getImageData(0, 0, sampleWidth, sampleHeight).data;
+
+      const scale = Math.max(width / naturalWidth, height / naturalHeight);
+      const sourceLeft = (naturalWidth - width / scale) / 2;
+      const sourceTop = (naturalHeight - height / scale) / 2;
+      const sourceRight = sourceLeft + width / scale;
+      const sourceBottom = sourceTop + height / scale;
+      let minInkX = Infinity;
+      for (let y = 0; y < sampleHeight; y++) {
+        const sy = (y + 0.5) * naturalHeight / sampleHeight;
+        if (sy < sourceTop || sy > sourceBottom) continue;
+        for (let x = 0; x < sampleWidth; x++) {
+          const sx = (x + 0.5) * naturalWidth / sampleWidth;
+          if (sx < sourceLeft || sx > sourceRight || sx >= minInkX) continue;
+          const i = (y * sampleWidth + x) * 4;
+          const darkness = (pixels[i] + pixels[i + 1] + pixels[i + 2]) / 3;
+          if (pixels[i + 3] > 100 && darkness < 155) minInkX = sx;
+        }
+      }
+      if (Number.isFinite(minInkX)) {
+        const inset = Math.max(0, (minInkX - sourceLeft) * scale);
+        wordmark.style.transform = 'translateX(' + (-inset).toFixed(2) + 'px)';
+      }
+    } catch (e) {
+      // Leave the unchanged wordmark visible if pixel sampling is unavailable.
+      wordmark.style.transform = 'none';
+    }
+  };
+  wordmark.addEventListener('load', alignWordmark);
+  window.addEventListener('resize', alignWordmark);
+  if (wordmark.complete) alignWordmark();
 })();
 </script>
 </body>
